@@ -12,8 +12,8 @@ const display = Playfair_Display({ variable: "--font-display", subsets: ["latin"
 const body = Inter({ variable: "--font-body", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Metaarth Capital — Institutional Strategy for the Sophisticated Investor",
-  description: "SEBI-registered AIF Category III manager. Trust, sophistication, performance.",
+  title: "Metaarth Capital — Professional Investment Management for Ultra-HNIs",
+  description: "SEBI-registered AIF Category III manager specializing in sophisticated wealth management for Ultra-HNIs and Family Offices.",
 };
 
 export default function RootLayout({

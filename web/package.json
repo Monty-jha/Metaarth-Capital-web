@@ -1,24 +1,20 @@
 {
-<<<<<<< HEAD
-  "name": "web",
+  "name": "metaarth-capital-web",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently -k -n NEXT,API -c \"#f59e0b,#1e3a8a\" \"npm:dev:next\" \"npm:dev:server\"",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "dev:next": "cross-env NEXT_DISABLE_DEVTOOLS=1 next dev -p 3000",
-    "dev:server": "nodemon --watch server --ext ts,js --exec \"node server/index.js\"",
-    "build:server": "node server/index.js"
+    "lint": "next lint",
+    "export": "next build && next export"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cors": "^2.8.5",
-    "dotenv": "^17.2.2",
     "express": "^5.1.0",
-    "framer-motion": "^11.11.17",
+    "framer-motion": "^12.23.14",
     "helmet": "^8.1.0",
     "next": "14.2.15",
     "nodemailer": "^7.0.6",
@@ -44,15 +40,3 @@
     "node": ">=18"
   }
 }
-=======
-  "name": "metaarth-aif",
-  "private": true,
-  "scripts": {
-    "dev": "npm --prefix web run dev",
-    "dev:next": "npm --prefix web run dev:next",
-    "dev:server": "npm --prefix web run dev:server"
-  }
-}
-
-
->>>>>>> 19a90cedb1c6e0c54d6aea5483f9816d2c814822
