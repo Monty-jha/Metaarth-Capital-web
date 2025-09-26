@@ -1,0 +1,11 @@
+{
+  "name": "metaarth-aif",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix web run dev",
+    "dev:next": "npm --prefix web run dev:next",
+    "dev:server": "npm --prefix web run dev:server"
+  }
+}
+
+

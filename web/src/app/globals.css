@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff; /* pure white */
+  --foreground: #0b1020; /* deep navy */
+  --accent: #ffc107; /* brand yellow */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-body);
+  --font-serif: var(--font-display);
+}
+
+/* Force light theme to keep brand look */
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* Contact page adjustments - remove top gap before footer only on contact */
+.contact-theme footer { margin-top: 0 !important; }
+
+/* Remove any default hr/border lines that could show as black lines */
+hr, 
+footer > div:has(> hr),
+footer hr {
+  display: none !important;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-lg px-5 py-3 text-sm font-medium transition-colors;
+  background-color: var(--foreground);
+  color: var(--background);
+}
+
+.btn-primary:hover {
+  background-color: color-mix(in oklab, var(--foreground) 90%, white 10%);
+}
+
+.btn-accent {
+  @apply inline-flex items-center justify-center rounded-lg px-5 py-3 text-sm font-medium transition-colors border;
+  background-color: var(--accent);
+  color: #1a1300;
+  border-color: color-mix(in oklab, var(--accent) 80%, black 20%);
+}
+
+.section {
+  @apply max-w-6xl mx-auto px-6 md:px-8;
+}
+
+.section-title {
+  @apply text-2xl md:text-4xl font-semibold tracking-tight;
+  color: var(--accent);
+}
+
+.muted {
+  @apply text-sm md:text-base leading-relaxed;
+  color: color-mix(in oklab, var(--foreground) 70%, var(--background) 30%);
+}
+
+/* Hide Next.js devtools 'N' button during development */
+[data-nextjs-toolbox],
+[data-next-devtools-root],
+#nextjs__devtools,
+button[aria-label="Open Next.js Dev Tools"],
+button[aria-label="Open Next.js devtools"],
+button[aria-label*="Next.js"] {
+  display: none !important;
+}
+
+/* Shining social icons */
+.icon-shine svg {
+  animation: iconShine 2.2s ease-in-out infinite;
+}
+.icon-shine:hover svg {
+  filter: drop-shadow(0 0 14px rgba(255, 193, 7, 0.95));
+}
+@keyframes iconShine {
+  0%, 100% { filter: drop-shadow(0 0 0 rgba(255, 193, 7, 0)); }
+  50% { filter: drop-shadow(0 0 10px rgba(255, 193, 7, 0.8)); }
+}
+
+/* Footer sun lighting background */
+.sun-glow {
+  position: absolute;
+  pointer-events: none;
+  filter: blur(40px);
+  border-radius: 9999px;
+}
+.sun-glow--left {
+  top: -60px;
+  left: -80px;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle at center, rgba(255, 193, 7, 0.35), rgba(255, 193, 7, 0) 60%);
+  animation: sunPulse 7s ease-in-out infinite;
+}
+.sun-glow--right {
+  bottom: -80px;
+  right: -100px;
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle at center, rgba(255, 193, 7, 0.25), rgba(255, 193, 7, 0) 65%);
+  animation: sunPulse 9s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+@keyframes sunPulse {
+  0%, 100% { opacity: 0.35; transform: scale(0.96); }
+  50% { opacity: 0.6; transform: scale(1.05); }
+}
