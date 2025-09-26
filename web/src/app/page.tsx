@@ -231,23 +231,19 @@ export default function Home() {
           items={[
                   { 
                     quote: "Price is what you pay. Value is what you get", 
-                    author: "Warren Buffett",
-                    title: "The Oracle of Omaha"
+                    author: "Warren Buffett"
                   },
                   { 
                     quote: "Rule No.1: Never lose money. Rule No.2: Never forget rule No.1", 
-                    author: "Warren Buffett",
-                    title: "Investment Legend"
+                    author: "Warren Buffett"
                   },
                   { 
                     quote: "Risk comes from not knowing what you're doing", 
-                    author: "Warren Buffett",
-                    title: "Value Investing Pioneer"
+                    author: "Warren Buffett"
                   },
                   { 
                     quote: "An investment operation should be based on the safety of principal and an adequate return", 
-                    author: "Benjamin Graham",
-                    title: "Father of Value Investing"
+                    author: "Benjamin Graham"
                   },
                 ]}
               />

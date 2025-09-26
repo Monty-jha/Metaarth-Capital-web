@@ -6,7 +6,7 @@ const nextConfig = {
   poweredByHeader: false,
   generateEtags: false,
   experimental: {
-    optimizeCss: true,
+    // optimizeCss: true, // Disabled to fix critters dependency issue
   },
   images: {
     domains: ['i.pinimg.com', 'prudentequity.com'],

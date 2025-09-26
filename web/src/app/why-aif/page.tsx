@@ -107,7 +107,7 @@ export default function WhyAIF() {
 
       {/* Why AIF radial animation with mobile fallback */}
       <div className="bg-[#f5f5f5]">
-        <Section id="fund-highlights" className="py-16">
+        <Section className="py-16">
 
           {/* Mobile fallback: simple grid */}
           <div className="mt-8 grid gap-6 md:hidden">
