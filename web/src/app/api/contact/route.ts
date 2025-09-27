@@ -1,10 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-
-// Dynamic import for nodemailer to avoid build issues
-const getNodemailer = async () => {
-  const nodemailer = await import('nodemailer');
-  return nodemailer.default || nodemailer;
-};
+import nodemailer from 'nodemailer';
 
 export async function POST(request: NextRequest) {
   try {
@@ -18,69 +13,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check if environment variables are available
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-      console.error('Email configuration missing:', {
-        EMAIL_USER: !!process.env.EMAIL_USER,
-        EMAIL_PASS: !!process.env.EMAIL_PASS
-      });
-      return NextResponse.json(
-        { error: 'Email service not configured. Please contact support.' },
-        { status: 500 }
-      );
-    }
-
-    // Get nodemailer dynamically
-    const nodemailer = await getNodemailer();
-    
-    // Create transporter with better error handling
+    // Create transporter
     const transporter = nodemailer.createTransport({
       service: 'gmail',
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false, // true for 465, false for other ports
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
-      tls: {
-        rejectUnauthorized: false,
-        ciphers: 'SSLv3'
-      }
     });
-
-    // Verify transporter configuration
-    try {
-      await transporter.verify();
-      console.log('Email transporter verified successfully');
-    } catch (verifyError) {
-      console.error('Email transporter verification failed:', verifyError);
-      
-      // Try alternative configuration
-      const altTransporter = nodemailer.createTransport({
-        service: 'gmail',
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true,
-        auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASS,
-        }
-      });
-      
-      try {
-        await altTransporter.verify();
-        console.log('Alternative email configuration verified');
-        // Use alternative transporter
-        Object.assign(transporter, altTransporter);
-      } catch (altError) {
-        console.error('Alternative email configuration also failed:', altError);
-        return NextResponse.json(
-          { error: 'Email service authentication failed. Please contact support.' },
-          { status: 500 }
-        );
-      }
-    }
 
     // Email content
     const mailOptions = {
@@ -210,26 +150,17 @@ export async function POST(request: NextRequest) {
       `,
     };
 
-    // Send email with better error handling
-    try {
-      const info = await transporter.sendMail(mailOptions);
-      console.log('Email sent successfully:', info.messageId);
-      
-      return NextResponse.json(
-        { message: 'Email sent successfully' },
-        { status: 200 }
-      );
-    } catch (sendError) {
-      console.error('Error sending email:', sendError);
-      return NextResponse.json(
-        { error: 'Failed to send email. Please try again later.' },
-        { status: 500 }
-      );
-    }
-  } catch (error) {
-    console.error('General error in contact API:', error);
+    // Send email
+    await transporter.sendMail(mailOptions);
+
     return NextResponse.json(
-      { error: 'Internal server error. Please try again later.' },
+      { message: 'Email sent successfully' },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error('Error sending email:', error);
+    return NextResponse.json(
+      { error: 'Failed to send email' },
       { status: 500 }
     );
   }

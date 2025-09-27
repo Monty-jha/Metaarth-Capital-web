@@ -46,6 +46,7 @@ export const metadata: Metadata = {
       { url: '/Metaarth Circle.png', sizes: '32x32', type: 'image/png' },
       { url: '/Metaarth Circle.png', sizes: '16x16', type: 'image/png' },
       { url: '/Metaarth Circle.png', sizes: '48x48', type: 'image/png' },
+      { url: '/favicon.ico', sizes: 'any' },
     ],
     apple: [
       { url: '/Metaarth Circle.png', sizes: '180x180', type: 'image/png' },
@@ -53,6 +54,14 @@ export const metadata: Metadata = {
       { url: '/Metaarth Circle.png', sizes: '120x120', type: 'image/png' },
     ],
     shortcut: '/Metaarth Circle.png',
+    other: [
+      {
+        rel: 'icon',
+        url: '/Metaarth Circle.png',
+        sizes: '32x32',
+        type: 'image/png',
+      },
+    ],
   },
   manifest: '/manifest.json',
 };
@@ -64,6 +73,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/Metaarth Circle.png" type="image/png" />
+        <link rel="shortcut icon" href="/Metaarth Circle.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/Metaarth Circle.png" />
+      </head>
       <body className={`${display.variable} ${body.variable} antialiased`}>
         <HideDevButton />
         <ScrollToTop />
