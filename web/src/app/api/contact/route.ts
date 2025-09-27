@@ -13,14 +13,31 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create transporter
+    // Check if environment variables are set
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      console.error('Email credentials not configured');
+      return NextResponse.json(
+        { error: 'Email service not configured' },
+        { status: 500 }
+      );
+    }
+
+    // Create transporter with more robust configuration
     const transporter = nodemailer.createTransporter({
-      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false, // true for 465, false for other ports
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
+      tls: {
+        rejectUnauthorized: false
+      }
     });
+
+    // Log connection attempt
+    console.log('Attempting to send email via SMTP');
 
     // Email content
     const mailOptions = {
@@ -151,16 +168,25 @@ export async function POST(request: NextRequest) {
     };
 
     // Send email
-    await transporter.sendMail(mailOptions);
-
-    return NextResponse.json(
-      { message: 'Email sent successfully' },
-      { status: 200 }
-    );
+    try {
+      const info = await transporter.sendMail(mailOptions);
+      console.log('Email sent successfully:', info.messageId);
+      
+      return NextResponse.json(
+        { message: 'Email sent successfully' },
+        { status: 200 }
+      );
+    } catch (sendError) {
+      console.error('Error sending email:', sendError);
+      return NextResponse.json(
+        { error: 'Failed to send email. Please try again later.' },
+        { status: 500 }
+      );
+    }
   } catch (error) {
-    console.error('Error sending email:', error);
+    console.error('General error in contact API:', error);
     return NextResponse.json(
-      { error: 'Failed to send email' },
+      { error: 'Internal server error. Please try again later.' },
       { status: 500 }
     );
   }
