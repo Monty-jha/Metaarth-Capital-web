@@ -36,14 +36,23 @@ export default function Contact() {
       }
       
       const data = await res.json();
-      if (!res.ok || !data.success) {
-        throw new Error(data.message || "Failed to send message");
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to send message");
       }
-      setStatus(data.message || "Thank you. We will get back to you shortly.");
-      // Reset form safely using ref
+      
+      // Show success message
+      setStatus("✅ Thank you! Your message has been sent successfully.");
+      
+      // Reset form immediately after success
       if (formRef.current) {
         formRef.current.reset();
       }
+      
+      // Clear success message after 3 seconds
+      setTimeout(() => {
+        setStatus(null);
+      }, 3000);
+      
     } catch (err: any) {
       console.error("Contact form error:", err);
       setStatus(err.message || "Something went wrong. Please try again later.");
@@ -96,7 +105,19 @@ export default function Contact() {
             </div>
             <textarea name="message" required placeholder="Message" className="rounded-md border p-3 h-32 w-full transition shadow-sm focus:shadow-md focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:border-transparent" />
             <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="btn-primary !bg-[#dc3545] hover:!bg-[#c12f3e]" disabled={submitting}>{submitting ? "Sending..." : "Send Message"}</motion.button>
-            {status && <p className="muted mt-2 text-[#dc3545]">{status}</p>}
+            {status && (
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className={`mt-4 p-3 rounded-lg text-center font-medium ${
+                  status.includes('✅') 
+                    ? 'bg-green-100 text-green-800 border border-green-200' 
+                    : 'bg-red-100 text-red-800 border border-red-200'
+                }`}
+              >
+                {status}
+              </motion.div>
+            )}
           </motion.form>
         </div>
 
