@@ -1,0 +1,27 @@
+{
+  "name": "Metaarth Capital",
+  "short_name": "Metaarth",
+  "description": "SEBI-registered AIF Category III manager specializing in sophisticated wealth management for Ultra-HNIs and Family Offices.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffc107",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/Metaarth Circle.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/Metaarth Circle.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["finance", "business", "investment"],
+  "lang": "en",
+  "dir": "ltr"
+}
