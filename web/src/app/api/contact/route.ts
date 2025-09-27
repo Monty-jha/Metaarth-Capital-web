@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import * as nodemailer from 'nodemailer';
+
+// Dynamic import for nodemailer to avoid build issues
+const getNodemailer = async () => {
+  const nodemailer = await import('nodemailer');
+  return nodemailer.default || nodemailer;
+};
 
 export async function POST(request: NextRequest) {
   try {
@@ -25,6 +30,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Get nodemailer dynamically
+    const nodemailer = await getNodemailer();
+    
     // Create transporter with better error handling
     const transporter = nodemailer.createTransport({
       service: 'gmail',
