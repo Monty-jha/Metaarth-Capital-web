@@ -20,7 +20,7 @@ export function Footer() {
             </div>
           </Link>
           <div className="h-1 w-14 bg-[var(--accent)] rounded-full mt-1" />
-          <p className="muted mt-0 text-[15px] leading-snug max-w-xs">Institutional strategy for the sophisticated investor.</p>
+          <p className="muted mt-0 text-[15px] leading-snug max-w-xs">Professional investment management for Ultra-HNIs and Family Offices.</p>
         </motion.div>
 
         <motion.div
@@ -58,7 +58,8 @@ export function Footer() {
         >
           <div className="font-semibold">Contact</div>
           <div className="mt-2 text-[15px] space-y-1">
-            <p className="muted">METAARTH FINSERVE PRIVATE LIMITED 7, Ground Floor, Saran Chamber- II, Park Road, Hazrataganj, Lucknow - 226001 India.</p>
+            <p className="muted">Metaarth Capital
+            Office Space No. Part 8 and 9, Saran Chamber- 2, Lucknow- 226001.</p>
             <p className="muted">+91 9839906754,+91 8104958203</p>
             <p className="muted">metaarthfinserve@gmail.com</p>
           </div>

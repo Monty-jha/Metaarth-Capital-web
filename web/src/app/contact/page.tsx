@@ -21,7 +21,7 @@ export default function Contact() {
     const form = new FormData(e.currentTarget);
     const payload = Object.fromEntries(form.entries());
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
